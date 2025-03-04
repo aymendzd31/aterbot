@@ -1,15 +1,14 @@
 {
-    "client": {
-        "host": "KAYNAFAMILY.aternos.me",
-        "port": 26333,
-        "username": "aymenafk"
-    },
-    
-    "! DO NOT EDIT BELOW !": "ONLY IF YOU KNOW WHAT YOU ARE DOING",
-    "logLevel": ["error", "log", "debug"],
-    "action": {
-        "commands": ["forward", "back", "left", "right", "jump"],
-        "holdDuration": 5000,
-        "retryDelay": 5000
-    }
+	"client": {
+		"host": "KAYNAFAMILY.aternos.me",
+		"port": "26333",
+		"username": "AYMEN_BOT"
+	},
+	"! DO NOT EDIT BELOW !": "ONLY IF YOU KNOW WHAT YOU ARE DOING",
+	"logLevel": ["error", "log", "debug"],
+	"action": {
+		"commands": ["forward", "back", "left", "right", "jump"],
+		"holdDuration": 5000,
+		"retryDelay": 5000
+	}
 }
