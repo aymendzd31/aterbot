@@ -1,6 +1,8 @@
 import Mineflayer from 'mineflayer';
 import { sleep, getRandom } from "./utils.ts";
-import CONFIG from "../config.json" assert { type: 'json' };
+import fs from "fs";
+
+const CONFIG = JSON.parse(fs.readFileSync("./config.json", "utf-8"));
 
 let loop: NodeJS.Timeout;
 let bot: Mineflayer.Bot;
