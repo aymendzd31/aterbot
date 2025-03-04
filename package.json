@@ -3,7 +3,7 @@
   "type": "module",
   "name": "aterbot",
   "version": "0.0.0",
-  "packageManager": "pnpm@8"
+  "packageManager": "npm@latest"
   "scripts": {
     "start": "tsx ./src/index.ts",
     "dev": "node --inspect --loader tsx ./src/index.ts"
