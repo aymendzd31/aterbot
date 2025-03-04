@@ -1,74 +1,41 @@
-import Mineflayer from 'mineflayer';
-import { sleep, getRandom } from "./utils.ts";
-import fs from "fs";
+import Mineflayer from "mineflayer";
+import { sleep, getRandom } from "./utils";
+import CONFIG from "../config.json" assert { type: "json" };
 
-const CONFIG = JSON.parse(fs.readFileSync("./config.json", "utf-8"));
+let bot: any;
 
-let loop: NodeJS.Timeout;
-let bot: Mineflayer.Bot;
-
-const disconnect = (): void => {
-	clearInterval(loop);
-	bot?.quit?.();
-	bot?.end?.();
+const disconnect = () => {
+    clearInterval(loop);
+    bot?.quit?.();
+    bot?.end?.();
 };
 
-const reconnect = async (): Promise<void> => {
-	console.log(`Trying to reconnect in ${CONFIG.action.retryDelay / 1000} seconds...\n`);
-
-	disconnect();
-	await sleep(CONFIG.action.retryDelay);
-	createBot();
+const reconnect = async () => {
+    console.log(`🔄 Trying to reconnect in ${CONFIG.action.retryDelay / 1000} seconds...`);
+    await sleep(CONFIG.action.retryDelay);
+    startBot();
 };
 
-const createBot = (): void => {
-	bot = Mineflayer.createBot({
-		host: CONFIG.client.host,
-		port: +CONFIG.client.port,
-		username: CONFIG.client.username
-	} as const);
+const startBot = () => {
+    console.log("🔄 Trying to connect to the server...");
 
-	bot.once('error', error => {
-		console.error(`AFKBot got an error: ${error}`);
-	});
-	bot.once('kicked', rawResponse => {
-		console.error(`\n\nAFKbot is disconnected: ${rawResponse}`);
-		reconnect(); // إعادة الاتصال مباشرة عند الطرد
-	});
-	bot.once('end', () => void reconnect());
+    bot = Mineflayer.createBot({
+        host: "KAYNAFAMILY.aternos.me",
+        port: 26333,
+        username: "AYMEN_AFK",
+        auth: CONFIG.account.auth
+    });
 
-	bot.once('spawn', () => {
-		const changePos = async (): Promise<void> => {
-			const lastAction = getRandom(CONFIG.action.commands) as Mineflayer.ControlState;
-			const halfChance: boolean = Math.random() < 0.5; // 50% فرصة للجري
+    bot.on("login", () => console.log("✅ Successfully logged in!"));
+    bot.on("error", (err) => console.error("❌ Connection error:", err));
+    bot.on("end", () => {
+        console.log("🔴 Disconnected from server.");
+        reconnect();
+    });
 
-			console.debug(`${lastAction}${halfChance ? " with sprinting" : ''}`);
-
-			bot.setControlState('sprint', halfChance);
-			bot.setControlState(lastAction, true);
-
-			await sleep(CONFIG.action.holdDuration);
-			bot.clearControlStates();
-		};
-
-		const changeView = async (): Promise<void> => {
-			const yaw = (Math.random() * Math.PI) - (0.5 * Math.PI);
-			const pitch = (Math.random() * Math.PI) - (0.5 * Math.PI);
-			
-			await bot.look(yaw, pitch, false);
-		};
-		
-		loop = setInterval(() => {
-			changeView();
-			changePos();
-		}, CONFIG.action.holdDuration);
-	});
-
-	bot.once('login', () => {
-		console.log(`AFKBot logged in as ${bot.username}\n\n`);
-	});
+    bot.on("kicked", (reason) => console.log(`⚠️ Kicked from server: ${reason}`));
+    bot.on("death", () => console.log("💀 Bot died, respawning..."));
 };
 
-export default (): void => {
-	createBot();
-};
+// بدء البوت
+startBot();
