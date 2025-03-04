@@ -2,8 +2,8 @@
   "private": true,
   "type": "module",
   "name": "aterbot",
-  "version": "0.0.0",
-  "packageManager": "pnpm@8"
+  "version": "0.0.1",
+  "packageManager": "pnpm@latest",
   "scripts": {
     "start": "tsx ./src/index.ts",
     "dev": "node --inspect --loader tsx ./src/index.ts"
