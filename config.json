@@ -2,7 +2,7 @@
 	"client": {
 		"host": "KAYNAFAMILY.aternos.me",
 		"port": "26333",
-		"username": "AYMEN_BOT"
+		"username": "AYMEN_AFK"
 	},
 	"! DO NOT EDIT BELOW !": "ONLY IF YOU KNOW WHAT YOU ARE DOING",
 	"logLevel": ["error", "log", "debug"],
