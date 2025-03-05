@@ -2,7 +2,7 @@ import Mineflayer from "mineflayer";
 import { sleep, getRandom } from "./utils";
 import fs from "fs";
 
-const CONFIG = JSON.parse(fs.readFileSync("../config.json", "utf8"));
+const CONFIG = JSON.parse(fs.readFileSync("/workspace/config.json", "utf8"));
 let bot: any;
 
 const disconnect = () => {
