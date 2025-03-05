@@ -40,3 +40,5 @@ const startBot = () => {
 
 // بدء البوت
 startBot();
+
+export default startBot;
