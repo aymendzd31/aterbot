@@ -5,8 +5,7 @@
   "version": "0.0.1",
   "packageManager": "pnpm@8.15.5",
   "scripts": {
-  "heroku-postbuild": "pnpm install --no-frozen-lockfile"
-  }
+    "heroku-postbuild": "pnpm install --no-frozen-lockfile",
     "start": "tsx ./src/index.ts",
     "dev": "node --inspect --loader tsx ./src/index.ts"
   },
