@@ -6,7 +6,7 @@
   "packageManager": "pnpm@8.15.5",
   "scripts": {
     "heroku-postbuild": "pnpm install --no-frozen-lockfile",
-    "start": "tsx ./src/index.ts",
+    "start": "tsx ./src/bot.ts",
     "dev": "node --inspect --loader tsx ./src/index.ts"
   },
   "dependencies": {
