@@ -21,8 +21,8 @@ const startBot = () => {
     console.log("🔄 Trying to connect to the server...");
 
     bot = Mineflayer.createBot({
-        host: "KAYNAFAMILY.aternos.me",
-        port: 26333,
+        host: "Chilaxcraft.aternos.me",
+        port: 19750,
         username: "AYMEN_AFK",
         auth: CONFIG.account.auth
     });
